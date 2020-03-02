@@ -1,39 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<!-- Navigation -->
-
-<!--	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">-->
-<!--		<div class="container">-->
-<!--			<a class="navbar-brand" href="#"><img src="./static/assets/logo.png" style="width:3em; height:3em;">Shopify-->
-<!--				for blog</a>-->
-<!--			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"-->
-<!--					aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--				<span class="navbar-toggler-icon"></span>-->
-<!--			</button>-->
-<!--			<div class="collapse navbar-collapse" id="navbarResponsive">-->
-<!--				<ul class="navbar-nav ml-auto">-->
-<!--					<li class="nav-item active">-->
-<!--						<a class="nav-link" href="#">Home-->
-<!--							<span class="sr-only">(current)</span>-->
-<!--						</a>-->
-<!--					</li>-->
-<!--					<li class="nav-item">-->
-<!--						<a class="nav-link" href="/blogs">blogs</a>-->
-<!--					</li>-->
-<!--					<li class="nav-item">-->
-<!--						<a class="nav-link" href="/register">register</a>-->
-<!--					</li>-->
-<!--					<li class="nav-item">-->
-<!--						<a class="nav-link" href="/login">login</a>-->
-<!--					</li>-->
-<!--				</ul>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</nav>-->
-
-
 <!-- Page Content -->
 <div class="container">
 
@@ -68,60 +35,62 @@
 			<hr>
 
 			<!-- Comments Form -->
+
 			<div class="card my-4">
 				<h5 class="card-header">Leave a Comment:</h5>
 				<div class="card-body">
-					<form>
+					<form id="new-blog" action="/comments/new/{{post.id}}/{{post.author}}" method="post">
 						<div class="form-group">
-							<textarea class="form-control" rows="3"></textarea>
+							<textarea class="form-control" name="commenter" placeholder="comment" rows="3"></textarea>
 						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-danger">Submit</button>
 					</form>
 				</div>
 			</div>
 
 			<!-- Single Comment -->
+			{% for comment in comments %}
 			<div class="media mb-4">
 				<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
 				<div class="media-body">
-					<h5 class="mt-0">Commenter Name</h5>
-					Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
-					purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-					vulputate fringilla. Donec lacinia congue felis in faucibus.
+					<h5 class="mt-0">{{ comment.commentator }}</h5>
+					<p> {{ comment.commenter }} </p>
+					<small> Posted at comment.created_at </small>
 				</div>
 			</div>
+			{% endfor %}
 
 			<!-- Comment with nested comments -->
-			<div class="media mb-4">
-				<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-				<div class="media-body">
-					<h5 class="mt-0">Commenter Name</h5>
-					Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
-					purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-					vulputate fringilla. Donec lacinia congue felis in faucibus.
+			<!--			<div class="media mb-4">-->
+			<!--				<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">-->
+			<!--				<div class="media-body">-->
+			<!--					<h5 class="mt-0">Commenter Name</h5>-->
+			<!--					Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras-->
+			<!--					purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi-->
+			<!--					vulputate fringilla. Donec lacinia congue felis in faucibus.-->
 
-					<div class="media mt-4">
-						<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-						<div class="media-body">
-							<h5 class="mt-0">Commenter Name</h5>
-							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-							Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc
-							ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-						</div>
-					</div>
+			<!--					<div class="media mt-4">-->
+			<!--						<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">-->
+			<!--						<div class="media-body">-->
+			<!--							<h5 class="mt-0">Commenter Name</h5>-->
+			<!--							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.-->
+			<!--							Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc-->
+			<!--							ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.-->
+			<!--						</div>-->
+			<!--					</div>-->
 
-					<div class="media mt-4">
-						<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-						<div class="media-body">
-							<h5 class="mt-0">Commenter Name</h5>
-							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-							Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc
-							ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-						</div>
-					</div>
+			<!--					<div class="media mt-4">-->
+			<!--						<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">-->
+			<!--						<div class="media-body">-->
+			<!--							<h5 class="mt-0">Commenter Name</h5>-->
+			<!--							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.-->
+			<!--							Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc-->
+			<!--							ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.-->
+			<!--						</div>-->
+			<!--					</div>-->
 
-				</div>
-			</div>
+			<!--				</div>-->
+			<!--			</div>-->
 
 		</div>
 
